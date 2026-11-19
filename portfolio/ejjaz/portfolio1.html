@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Ubaid Shah Bukhari | IT Specialist & Digital Creator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#07090e',
+                            card: '#0f1422',
+                            border: '#1e293b',
+                            cyan: '#06b6d4',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            emerald: '#10b981',
+                            amber: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(6, 182, 212, 0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(168, 85, 247, 0.5)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #07090e;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(15, 20, 34, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-nav {
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Gradient Text Effects */
+        .text-gradient {
+            background: linear-gradient(135deg, #06b6d4 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Typing Cursor Animation */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Animations (Reveals on Scroll) */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(30px) scale(0.96);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Custom Neon Glow Dot Cursor */
+        #custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(6, 182, 212, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.8);
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out, width 0.2s, height 0.2s, background-color 0.2s;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-white relative">
+
+    <!-- Interactive Glowing Cursor -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+
+    <!-- Background Particle Canvas -->
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-[140px] pointer-events-none animate-pulse"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-purple-500/10 rounded-full filter blur-[150px] pointer-events-none animate-pulse" style="animation-delay: 2s;"></div>
+    <div class="fixed bottom-10 left-10 w-80 h-80 bg-pink-500/10 rounded-full filter blur-[130px] pointer-events-none animate-pulse" style="animation-delay: 4s;"></div>
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#hero" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 p-0.5 group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-cyber-bg rounded-[10px] flex items-center justify-center font-black text-cyan-400 text-sm">
+                            SUSB
+                        </div>
+                    </div>
+                    <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-cyan-400 transition-colors">
+                        Syed Ubaid<span class="text-cyan-400">.dev</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center gap-6 text-xs xl:text-sm font-medium">
+                    <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#education" class="text-gray-300 hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#experience" class="text-gray-300 hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#projects" class="text-gray-300 hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#strengths" class="text-gray-300 hover:text-cyan-400 transition-colors">Strengths</a>
+                    <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Hire / Collaborate
+                    </a>
+                </div>
+
+                <!-- Mobile Navigation Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="p-2 rounded-xl glass-card text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden glass-card border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">About Me</a>
+            <a href="#skills" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Skills</a>
+            <a href="#education" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Education</a>
+            <a href="#experience" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Experience</a>
+            <a href="#projects" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Projects</a>
+            <a href="#strengths" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Strengths & Objective</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800">Contact</a>
+            <a href="#contact" class="mobile-link block w-full text-center py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-purple-600 text-white mt-4">Hire / Collaborate</a>
+        </div>
+    </header>
+
+    <!-- MAIN BODY CONTAINER -->
+    <main class="relative z-10 pt-20">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="min-h-[calc(100vh-5rem)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Info Container -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-init">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-400 text-xs font-mono font-bold tracking-wide">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                        AVAILABLE FOR FREELANCE & INTERNSHIPS
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-none">
+                        Syed Ubaid<br />
+                        <span class="text-gradient">Shah Bukhari</span>
+                    </h1>
+
+                    <div class="text-lg sm:text-2xl font-mono text-gray-300 min-h-[44px] flex items-center justify-center lg:justify-start gap-2">
+                        <span class="text-purple-400">></span>
+                        <span>Expert In:</span>
+                        <span id="typing-text" class="text-cyan-400 font-bold typing-cursor"></span>
+                    </div>
+
+                    <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Hello! I'm <strong class="text-white">Syed Ubaid Shah Bukhari</strong>, a creative thinker and technology enthusiast passionate about digital media, voice automation, and modern web applications. I transform innovative concepts into high-quality digital experiences.
+                    </p>
+
+                    <!-- Actions -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#projects" class="px-7 py-3.5 rounded-xl font-bold bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 text-white shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-1 transition-all text-sm">
+                            Explore Projects <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
+                        </a>
+                        <a href="#contact" class="px-7 py-3.5 rounded-xl font-bold glass-card text-gray-200 hover:text-white border border-gray-700 hover:border-cyan-500 hover:-translate-y-1 transition-all text-sm">
+                            Contact Me Directly
+                        </a>
+                    </div>
+
+                    <!-- Quick Metrics Cards -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-gray-800 max-w-xl mx-auto lg:mx-0">
+                        <div class="glass-card p-3.5 rounded-2xl text-center border border-gray-800 hover:border-cyan-500/40 transition-colors">
+                            <span class="counter-number text-2xl font-black text-cyan-400" data-target="7">0</span><span class="text-cyan-400 font-bold">+</span>
+                            <p class="text-[10px] text-gray-400 uppercase font-mono mt-0.5">Projects</p>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-2xl text-center border border-gray-800 hover:border-purple-500/40 transition-colors">
+                            <span class="counter-number text-2xl font-black text-purple-400" data-target="3">0</span>
+                            <p class="text-[10px] text-gray-400 uppercase font-mono mt-0.5">Months Exp.</p>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-2xl text-center border border-gray-800 hover:border-pink-500/40 transition-colors">
+                            <span class="counter-number text-2xl font-black text-pink-400" data-target="5">0</span>
+                            <p class="text-[10px] text-gray-400 uppercase font-mono mt-0.5">Skill Areas</p>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-2xl text-center border border-gray-800 hover:border-emerald-500/40 transition-colors">
+                            <span class="counter-number text-2xl font-black text-emerald-400" data-target="100">0</span><span class="text-emerald-400 font-bold">%</span>
+                            <p class="text-[10px] text-gray-400 uppercase font-mono mt-0.5">Dedication</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Interactive Cyber Card -->
+                <div class="lg:col-span-5 flex justify-center reveal-init reveal-delay-2">
+                    <div class="relative w-full max-w-md animate-float">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-30 blur-2xl"></div>
+                        <div class="relative rounded-3xl glass-card p-6 border border-gray-700/60 shadow-2xl space-y-6">
+                            
+                            <!-- Profile Emblem Header -->
+                            <div class="relative w-full h-64 rounded-2xl bg-gradient-to-b from-gray-900 to-cyber-bg flex flex-col items-center justify-center border border-gray-800 overflow-hidden group">
+                                <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white font-black text-3xl shadow-xl shadow-cyan-500/30 group-hover:rotate-6 transition-transform">
+                                    SUSB
+                                </div>
+                                <div class="mt-4 text-center px-4">
+                                    <h3 class="text-lg font-extrabold text-white">Syed Ubaid Shah Bukhari</h3>
+                                    <p class="text-xs text-cyan-400 font-mono mt-1"><i class="fa-solid fa-location-dot mr-1"></i> Pakistan | IT Specialist</p>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Terminal Code Window -->
+                            <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono text-xs space-y-1 text-gray-300">
+                                <div class="flex items-center gap-1.5 mb-2 pb-2 border-b border-gray-800 text-[10px] text-gray-500">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                                    <span class="ml-2 text-gray-400">ubaid_profile.json</span>
+                                </div>
+                                <p><span class="text-purple-400">"qualification"</span>: <span class="text-emerald-400">"Matric / D.A.E (In Progress)"</span>,</p>
+                                <p><span class="text-purple-400">"phone"</span>: <span class="text-cyan-400">"03333422969"</span>,</p>
+                                <p><span class="text-purple-400">"email"</span>: <span class="text-cyan-400">"93ubaidshab@gmail.com"</span>,</p>
+                                <p><span class="text-purple-400">"status"</span>: <span class="text-amber-400">"Open for Opportunities"</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT ME & PERSONAL INFORMATION SECTION -->
+        <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto reveal-init">
+                    <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 01. Profile Summary</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white">About Me</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Bio Description Card -->
+                    <div class="lg:col-span-6 reveal-init reveal-delay-1 flex">
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-4 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Hardworking, Creative & Tech-Driven</h3>
+                                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                                    I am a hardworking, creative, and motivated individual with a strong interest in technology, digital media, and computer applications.
+                                </p>
+                                <p class="text-gray-300 leading-relaxed text-sm sm:text-base mt-4">
+                                    I have practical skills in video editing, graphic designing, website development, voice automation (AI tools), and Microsoft Office. I enjoy learning new technologies and delivering quality solutions.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center gap-4">
+                                <i class="fa-solid fa-lightbulb text-cyan-400 text-2xl"></i>
+                                <p class="text-xs text-cyan-200">"With 3 months of practical experience, I am continuously expanding my technical abilities and seeking impactful IT roles."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info Grid Card -->
+                    <div class="lg:col-span-6 reveal-init reveal-delay-2 flex">
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-6 flex-1">
+                            <h3 class="text-xl font-bold text-white border-b border-gray-800 pb-4 flex items-center gap-3">
+                                <i class="fa-solid fa-id-card text-purple-400"></i> Personal Information
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Full Name</p>
+                                    <p class="text-white font-semibold">Syed Ubaid Shah Bukhari</p>
+                                </div>
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Father's Name</p>
+                                    <p class="text-white font-semibold">Syed Nasir Shah Bukhari</p>
+                                </div>
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Email</p>
+                                    <a href="mailto:93ubaidshab@gmail.com" class="text-cyan-400 font-semibold hover:underline break-all">93ubaidshab@gmail.com</a>
+                                </div>
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Contact Phone</p>
+                                    <a href="tel:03333422969" class="text-white font-semibold hover:text-cyan-400">03333422969</a>
+                                </div>
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Qualification</p>
+                                    <p class="text-emerald-400 font-semibold">Matriculation (Completed)</p>
+                                </div>
+                                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                    <p class="text-[10px] text-gray-400 font-mono uppercase mb-1">Current Education</p>
+                                    <p class="text-purple-400 font-semibold">D.A.E. (In Progress)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MY SKILLS SECTION -->
+        <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto reveal-init">
+                    <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 02. Technical Toolkit</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white">My Skills</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 1. Video Editing -->
+                    <div class="glass-card p-7 rounded-3xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 space-y-4 reveal-init">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">1. Video Editing</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Video editing & production</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Social media reels & shorts</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Transitions & visual effects</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Audio editing & sync</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Text animations & subtitles</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> Promotional video creation</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. Graphic Designing -->
+                    <div class="glass-card p-7 rounded-3xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 space-y-4 reveal-init reveal-delay-1">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">2. Graphic Designing</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Social media post design</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Logo designing & identity</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Banners & posters</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Business advertisements</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Typography & layouts</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-purple-400 text-xs"></i> Digital content design</li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. Web Development -->
+                    <div class="glass-card p-7 rounded-3xl border border-gray-800 hover:border-pink-500/50 transition-all duration-300 space-y-4 reveal-init reveal-delay-2">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">3. Web Development</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> HTML5 Structure</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> CSS3 & Modern Styling</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> JavaScript Logic</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> Responsive Website Design</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> Landing Page Creation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-pink-400 text-xs"></i> Custom Layouts</li>
+                        </ul>
+                    </div>
+
+                    <!-- 4. Voice Automation -->
+                    <div class="glass-card p-7 rounded-3xl border border-gray-800 hover:border-emerald-500/50 transition-all duration-300 space-y-4 reveal-init">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">4. Voice Automation</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> AI Voice Generation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Text-to-Speech Tech</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> AI Voice Assistants</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Automated Speech Workflows</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Audio Fine-Tuning</li>
+                        </ul>
+                    </div>
+
+                    <!-- 5. Microsoft Office -->
+                    <div class="glass-card p-7 rounded-3xl border border-gray-800 hover:border-amber-500/50 transition-all duration-300 space-y-4 reveal-init reveal-delay-1 md:col-span-2 lg:col-span-1">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">5. Microsoft Office</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400 text-xs"></i> MS Word Formatting</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400 text-xs"></i> MS Excel Data Entry</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400 text-xs"></i> MS PowerPoint Presentations</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400 text-xs"></i> Document Structuring</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400 text-xs"></i> Professional Layouts</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EDUCATION & WORK EXPERIENCE -->
+        <section id="education" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <!-- Education Sub-section -->
+                <div class="space-y-8">
+                    <div class="text-center max-w-3xl mx-auto reveal-init">
+                        <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 03. Academic Background</h2>
+                        <p class="text-3xl sm:text-5xl font-black text-white">Education</p>
+                        <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-4 reveal-init">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                                Completed
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">MATRICULATION</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Completed matriculation, laying down a strong baseline in fundamental science, mathematics, and computer literacy.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-3xl border border-gray-800 space-y-4 reveal-init reveal-delay-1">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
+                                In Progress
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">DIPLOMA OF ASSOCIATE ENGINEERING (D.A.E.)</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Currently pursuing D.A.E. to advance technical knowledge, practical engineering methods, and applied computing capabilities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience Sub-section -->
+                <div id="experience" class="space-y-8 pt-8">
+                    <div class="text-center max-w-3xl mx-auto reveal-init">
+                        <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 04. Practical History</h2>
+                        <p class="text-3xl sm:text-5xl font-black text-white">Work Experience</p>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto glass-card p-8 sm:p-10 rounded-3xl border border-gray-800 space-y-6 reveal-init">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-800 pb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">PRACTICAL IT & CREATIVE EXPERIENCE</h3>
+                                <p class="text-cyan-400 font-mono text-sm">Digital Media & Computer Work</p>
+                            </div>
+                            <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                                3 Months Practical
+                            </span>
+                        </div>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            During this period, I gained practical hands-on experience by executing real-world tasks across video production, graphic post design, website customization, MS Office workflows, and AI tools integration.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-200">
+                            <div class="p-3 rounded-xl bg-gray-900/80 border border-gray-800 flex items-center gap-2"><i class="fa-solid fa-play text-cyan-400"></i> Video Editing & Short Reels</div>
+                            <div class="p-3 rounded-xl bg-gray-900/80 border border-gray-800 flex items-center gap-2"><i class="fa-solid fa-pen text-purple-400"></i> Graphic Posters & Banners</div>
+                            <div class="p-3 rounded-xl bg-gray-900/80 border border-gray-800 flex items-center gap-2"><i class="fa-solid fa-code text-pink-400"></i> Web Page Customization</div>
+                            <div class="p-3 rounded-xl bg-gray-900/80 border border-gray-800 flex items-center gap-2"><i class="fa-solid fa-robot text-emerald-400"></i> Voice Automation & Office Work</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. MY PROJECTS SECTION (10 PROJECTS TOTAL WITH FILTER) -->
+        <!-- 5. MY PROJECTS SECTION -->
+        <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto reveal-init">
+                    <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 05. Highlighted Work</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white">My Projects</p>
+                    <p class="text-gray-400 mt-2 text-sm">Explore my original projects and technical achievements. Click any card to open in a new tab.</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 reveal-init" id="project-filters">
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-white shadow-lg transition-all">All Projects</button>
+                    <button data-filter="web" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-card text-gray-300 hover:text-white border border-gray-800 transition-all">Web Development</button>
+                    <button data-filter="video" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-card text-gray-300 hover:text-white border border-gray-800 transition-all">Video Editing</button>
+                    <button data-filter="graphic" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-card text-gray-300 hover:text-white border border-gray-800 transition-all">Graphic Design</button>
+                    <button data-filter="ai" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold glass-card text-gray-300 hover:text-white border border-gray-800 transition-all">Voice & AI Tools</button>
+                </div>
+
+                <!-- Projects Dynamic Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                    <!-- Cards are populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. STRENGTHS, CAREER OBJECTIVE & INTERESTS -->
+        <section id="strengths" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <!-- Strengths -->
+                <div class="space-y-8">
+                    <div class="text-center max-w-3xl mx-auto reveal-init">
+                        <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 06. Attributes</h2>
+                        <p class="text-3xl font-black text-white">Professional Strengths</p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto reveal-init">
+                        <span class="px-4 py-2 rounded-xl glass-card border border-cyan-500/30 text-cyan-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-lightbulb mr-2"></i>Creative Thinking</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-purple-500/30 text-purple-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-puzzle-piece mr-2"></i>Problem Solving</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-pink-500/30 text-pink-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-bolt mr-2"></i>Quick Learning</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-emerald-500/30 text-emerald-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-clock mr-2"></i>Time Management</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-amber-500/30 text-amber-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-users mr-2"></i>Teamwork</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-blue-500/30 text-blue-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-comments mr-2"></i>Communication Skills</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-indigo-500/30 text-indigo-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-fire mr-2"></i>Self-Motivation</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-teal-500/30 text-teal-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-sliders mr-2"></i>Adaptability</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-rose-500/30 text-rose-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-eye mr-2"></i>Attention to Detail</span>
+                        <span class="px-4 py-2 rounded-xl glass-card border border-sky-500/30 text-sky-300 text-xs font-bold hover:scale-105 transition-transform"><i class="fa-solid fa-book-open mr-2"></i>Continuous Learning</span>
+                    </div>
+                </div>
+
+                <!-- Career Objective Card -->
+                <div class="glass-card p-8 sm:p-10 rounded-3xl border border-gray-800 max-w-4xl mx-auto space-y-4 reveal-init">
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-bullseye text-cyan-400"></i> Career Objective
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                        My objective is to build a successful career in the IT and digital technology industry. I want to use my creative and technical skills to work on innovative projects, gain professional experience, and contribute to an organization's success.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                        I aim to become a skilled professional in Web Development, Digital Media, and Voice Technology while continuously learning and improving my abilities.
+                    </p>
+                </div>
+
+                <!-- Interests Grid -->
+                <div class="space-y-6">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h3 class="text-lg font-bold text-white">My Key Interests</h3>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-5xl mx-auto reveal-init">
+                        <div class="glass-card p-4 rounded-2xl text-center border border-gray-800 hover:border-cyan-500 transition-colors">
+                            <i class="fa-solid fa-brain text-cyan-400 text-xl mb-2"></i>
+                            <p class="text-xs font-bold text-gray-200">Artificial Intelligence</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center border border-gray-800 hover:border-purple-500 transition-colors">
+                            <i class="fa-solid fa-globe text-purple-400 text-xl mb-2"></i>
+                            <p class="text-xs font-bold text-gray-200">Web Development</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center border border-gray-800 hover:border-pink-500 transition-colors">
+                            <i class="fa-solid fa-film text-pink-400 text-xl mb-2"></i>
+                            <p class="text-xs font-bold text-gray-200">Video Production</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center border border-gray-800 hover:border-emerald-500 transition-colors">
+                            <i class="fa-solid fa-palette text-emerald-400 text-xl mb-2"></i>
+                            <p class="text-xs font-bold text-gray-200">Graphic Designing</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center border border-gray-800 hover:border-amber-500 transition-colors col-span-2 sm:col-span-1">
+                            <i class="fa-solid fa-bullhorn text-amber-400 text-xl mb-2"></i>
+                            <p class="text-xs font-bold text-gray-200">Digital Marketing</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. CONTACT SECTION -->
+        <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto reveal-init">
+                    <h2 class="text-xs font-mono uppercase tracking-widest font-bold text-cyan-400 mb-2">// 07. Get In Touch</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white">Contact Me</p>
+                    <p class="text-cyan-400 font-bold mt-2">LET'S WORK TOGETHER!</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Contact Cards -->
+                    <div class="lg:col-span-5 glass-card p-8 rounded-3xl border border-gray-800 space-y-6 reveal-init">
+                        <h3 class="text-xl font-bold text-white mb-4">Direct Details</h3>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-mono uppercase">Full Name</p>
+                                <p class="text-white font-bold text-sm">Syed Ubaid Shah Bukhari</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-mono uppercase">Email</p>
+                                <a href="mailto:93ubaidshab@gmail.com" class="text-cyan-400 font-bold text-sm hover:underline">93ubaidshab@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-mono uppercase">Phone / WhatsApp</p>
+                                <a href="tel:03333422969" class="text-white font-bold text-sm hover:text-cyan-400">03333422969</a>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-800 space-y-2">
+                            <p class="text-xs text-gray-400 font-mono uppercase font-bold">Open For:</p>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300">Freelance</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300">Internship</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300">Web Dev</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300">Video Editing</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300">Graphic Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Animated Form -->
+                    <div class="lg:col-span-7 glass-card p-8 rounded-3xl border border-gray-800 reveal-init reveal-delay-1">
+                        <form id="contact-form" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="name" class="block text-xs font-mono font-bold text-gray-300 uppercase mb-2">Name</label>
+                                    <input type="text" id="name" required placeholder="Your full name" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-all text-sm">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-xs font-mono font-bold text-gray-300 uppercase mb-2">Email</label>
+                                    <input type="email" id="email" required placeholder="Your email address" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-all text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-xs font-mono font-bold text-gray-300 uppercase mb-2">Subject</label>
+                                <input type="text" id="subject" required placeholder="Project / Internship inquiry" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-all text-sm">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-xs font-mono font-bold text-gray-300 uppercase mb-2">Message</label>
+                                <textarea id="message" rows="4" required placeholder="Write your message details..." class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-all text-sm"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] transition-all text-sm">
+                                Send Message <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
+                            </button>
+
+                            <div id="form-status" class="hidden p-4 rounded-xl text-center text-xs font-bold border"></div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-2xl glass-card rounded-3xl border border-gray-700 p-6 sm:p-8 overflow-y-auto max-h-[90vh]">
+            <button id="close-modal-btn" aria-label="Close Project Modal" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl p-2 rounded-full glass-card">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-content" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800/80 py-10 px-4 text-center text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto space-y-3">
+            <p class="text-white font-bold text-sm uppercase tracking-wider">THANK YOU FOR VISITING MY PORTFOLIO!</p>
+            <p>Let's connect, collaborate, and create something amazing together.</p>
+            <p class="text-gray-500 pt-4">&copy; 2026 Syed Ubaid Shah Bukhari. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // 1. SCROLL-TRIGGERED ANIMATION OBSERVER
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-init').forEach(el => observer.observe(el));
+        }
+
+        // 2. CURSOR TRAILER LOGIC
+        const cursor = document.getElementById('custom-cursor');
+        window.addEventListener('mousemove', (e) => {
+            if (cursor) {
+                cursor.style.top = `${e.clientY}px`;
+                cursor.style.left = `${e.clientX}px`;
+            }
+        });
+
+        // 3. CANVAS PARTICLE BACKGROUND
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.color = Math.random() > 0.5 ? '#06b6d4' : '#a855f7';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 4. TYPING EFFECT
+        const typingTextElement = document.getElementById('typing-text');
+        const roles = [
+            'Video Editor',
+            'Graphic Designer',
+            'Web Developer',
+            'Voice Automation Specialist'
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typingTextElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTextElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 400;
+            }
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // 5. PROJECTS DATA (REVISED LIST WITH NEW TAB PROJECT URLS)
+        const projectsData = [
+            {
+                id: 1,
+                category: 'web',
+                title: 'Business Website Development – Ejaz Electric',
+                shortDesc: 'Digital business representation platform showcasing electrical services & inquiries.',
+                tags: ['HTML', 'CSS', 'Web Dev', 'Business Site'],
+                image: 'https://placehold.co/600x400/0c4a6e/38bdf8?text=Ejaz+Electric',
+                url: 'ejjaz/ejazelectric.html'
+            },
+            {
+                id: 2,
+                category: 'ai',
+                title: 'AI Promotional Advertisement',
+                shortDesc: 'Promotional ad concept engineered with automated AI voice generation & scene scripting.',
+                tags: ['AI Tools', 'Voice Automation', 'Video Production'],
+                image: 'https://placehold.co/600x400/3b0764/a855f7?text=AI+Promotional+Ad',
+                url: 'ejjaz/ejazai.mp4'
+            },
+            {
+                id: 3,
+                category: 'web',
+                title: 'Personal Portfolio Website',
+                shortDesc: 'Futuristic glassmorphism web portfolio presenting personal skills, education & experience.',
+                tags: ['HTML', 'CSS', 'JavaScript', 'UI/UX'],
+                image: 'https://placehold.co/600x400/030712/06b6d4?text=Personal+Portfolio',
+                url: 'https://github.com/93ubaidshab/personal-portfolio'
+            },
+            {
+                id: 4,
+                category: 'graphic',
+                title: 'Graphic Designing Projects Collection',
+                shortDesc: 'Social media post designs, logo artworks, posters & promotional ad materials.',
+                tags: ['Graphic Design', 'Branding', 'Typography'],
+                image: 'https://placehold.co/600x400/831843/ec4899?text=Graphic+Designs',
+                url: 'https://github.com/93ubaidshab/graphic-design-portfolio'
+            },
+            {
+                id: 5,
+                category: 'ai',
+                title: 'JARVIS Local Offline Voice Assistant',
+                shortDesc: 'Python offline AI voice assistant for PC automation, app launcher & voice commands.',
+                tags: ['Python', 'PyCharm', 'Voice Automation', 'Ollama AI'],
+                image: 'https://placehold.co/600x400/0284c7/e0f2fe?text=JARVIS+Voice+Assistant',
+                url: 'https://github.com/93ubaidshab/jarvis-voice-assistant'
+            },
+            {
+                id: 6,
+                category: 'video',
+                title: 'Cyberpunk Motion Graphics & Reel Pack',
+                shortDesc: 'High-energy short video edits with fast transitions, text FX, and audio sync.',
+                tags: ['Video Editing', 'Reels/Shorts', 'Visual FX'],
+                image: 'https://placehold.co/600x400/9f1239/fda4af?text=Motion+Graphics+Reels',
+                url: 'https://github.com/93ubaidshab/cyberpunk-reels-pack'
+            },
+            {
+                id: 7,
+                category: 'web',
+                title: 'Smart Home Automation Dashboard',
+                shortDesc: 'Interactive web application interface for controlling IoT smart home gadgets.',
+                tags: ['HTML', 'Tailwind', 'JavaScript', 'IoT UI'],
+                image: 'https://placehold.co/600x400/065f46/6ee7b7?text=Smart+Home+Dashboard',
+                url: 'https://github.com/93ubaidshab/smart-home-dashboard'
+            }
+        ];
+
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+
+            const filteredData = filter === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.category === filter);
+
+            filteredData.forEach((project, idx) => {
+                const card = document.createElement('a');
+                card.href = project.url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = `group glass-card rounded-3xl overflow-hidden border border-gray-800 hover:border-cyan-500/60 transition-all duration-300 flex flex-col justify-between reveal-init reveal-delay-${(idx % 3) + 1} cursor-pointer hover:-translate-y-1.5`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden h-44">
+                            <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors flex items-center justify-between">
+                                ${project.title}
+                            </h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">${project.shortDesc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 space-y-4">
+                        <div class="flex flex-wrap gap-1">
+                            ${project.tags.map(t => `<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-950 text-cyan-400 border border-gray-800">${t}</span>`).join('')}
+                        </div>
+                        <div class="w-full py-2.5 rounded-xl text-xs font-bold glass-card text-white border border-gray-700 group-hover:bg-cyan-500 group-hover:border-cyan-500 transition-all text-center flex items-center justify-center gap-2">
+                            Open Project <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Re-trigger reveal animation observer for new elements
+            initScrollAnimations();
+        }
+
+        // Project Filters Handling
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-cyan-500', 'text-white');
+                    b.classList.add('glass-card', 'text-gray-300');
+                });
+                btn.classList.remove('glass-card', 'text-gray-300');
+                btn.classList.add('bg-cyan-500', 'text-white');
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // Contact Form Feedback
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formStatus.classList.remove('hidden');
+            formStatus.className = 'p-4 rounded-xl text-center text-xs font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+            formStatus.textContent = 'Message sent successfully! Syed Ubaid Shah Bukhari will get back to you soon.';
+            contactForm.reset();
+            setTimeout(() => formStatus.classList.add('hidden'), 5000);
+        });
+
+        // Counter Numbers Logic
+        function animateCounters() {
+            document.querySelectorAll('.counter-number').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const increment = Math.ceil(target / 30);
+                const update = () => {
+                    count += increment;
+                    if (count >= target) {
+                        counter.textContent = target;
+                    } else {
+                        counter.textContent = count;
+                        setTimeout(update, 40);
+                    }
+                };
+                update();
+            });
+        }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            typeEffect();
+            renderProjects();
+            initScrollAnimations();
+            animateCounters();
+        });
+    </script>
+</body>
+</html>

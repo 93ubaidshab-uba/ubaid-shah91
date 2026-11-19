@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - 4 Video Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            900: '#0e7490',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-btn {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-500 relative flex flex-col justify-between">
+
+    <!-- Ambient Background Blobs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 dark:bg-cyan-500/10 rounded-full blur-3xl animate-blob"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-500/20 dark:bg-indigo-500/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Floating Theme Switcher & Actions -->
+    <div class="fixed top-6 right-6 z-40 flex items-center gap-3">
+        <button id="edit-all-btn" onclick="openEditModal(0)" class="glass-btn hover:scale-105 active:scale-95 px-4 py-2.5 rounded-full text-xs font-semibold flex items-center gap-2 shadow-lg text-slate-700 dark:text-slate-200 transition-all duration-300">
+            <i class="fa-solid fa-pen-to-square text-cyan-500"></i>
+            <span>Edit Videos</span>
+        </button>
+
+        <button id="theme-toggle" class="glass-btn hover:scale-110 active:scale-95 w-11 h-11 rounded-full flex items-center justify-center shadow-lg text-slate-700 dark:text-slate-200 transition-all duration-300">
+            <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+            <i class="fa-solid fa-sun text-lg hidden dark:block text-amber-400"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 w-full flex-grow">
+        
+        <!-- Header Title Section -->
+        <header class="text-center mb-14">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400">
+                    My Projects
+                </span>
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base font-normal">
+                A showcase of motion design, 3D animations, and video projects. Hover over a video to preview or click to open full view.
+            </p>
+        </header>
+
+        <!-- 4 Video 2x2 Grid -->
+        <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+            <!-- Cards render dynamically via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-xs text-slate-500 dark:text-slate-500 border-t border-slate-200/50 dark:border-slate-800/50">
+        <p>© <span id="year"></span> My Projects Portfolio. Powered by HTML5 & Tailwind CSS.</p>
+    </footer>
+
+    <!-- Video Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="closeLightbox()"></div>
+        <div class="relative w-full max-w-5xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 flex flex-col z-10 transform scale-95 transition-transform duration-300" id="lightbox-content">
+            <!-- Header bar inside modal -->
+            <div class="flex items-center justify-between px-6 py-4 bg-slate-900/90 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <span id="lb-counter" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">1 of 4</span>
+                    <h3 id="lb-title" class="text-base font-bold text-white truncate max-w-xs sm:max-w-md">Project Title</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="editCurrentLightboxVideo()" class="p-2 text-slate-400 hover:text-cyan-400 transition-colors" title="Edit Video">
+                        <i class="fa-solid fa-pencil text-sm"></i>
+                    </button>
+                    <button onclick="closeLightbox()" class="p-2 text-slate-400 hover:text-white transition-colors" title="Close (ESC)">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Player Frame -->
+            <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+                <video id="lb-video" class="w-full h-full object-contain" controls autoplay></video>
+                
+                <!-- Prev / Next Controls -->
+                <button onclick="prevLightbox()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center border border-white/10 backdrop-blur-sm transition-all hover:scale-110">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextLightbox()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center border border-white/10 backdrop-blur-sm transition-all hover:scale-110">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Lightbox Description -->
+            <div class="p-6 bg-slate-900 text-slate-300 text-sm">
+                <p id="lb-desc">Video description text content goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Video Details Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="closeEditModal()"></div>
+        <div class="relative w-full max-w-md glass-panel bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 z-10">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Edit Video Project</h3>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <form id="edit-form" onsubmit="saveVideoChanges(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Select Project Slot</label>
+                    <select id="edit-slot-select" onchange="loadFormValues(this.value)" class="w-full px-3 py-2 rounded-xl text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
+                        <option value="0">Project 1</option>
+                        <option value="1">Project 2</option>
+                        <option value="2">Project 3</option>
+                        <option value="3">Project 4</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Project Title</label>
+                    <input type="text" id="edit-title" required class="w-full px-3 py-2 rounded-xl text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Video Source URL (.mp4)</label>
+                    <input type="url" id="edit-src" required class="w-full px-3 py-2 rounded-xl text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Poster Image URL (Optional)</label>
+                    <input type="url" id="edit-poster" class="w-full px-3 py-2 rounded-xl text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Description</label>
+                    <textarea id="edit-desc" rows="3" class="w-full px-3 py-2 rounded-xl text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200"></textarea>
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeEditModal()" class="w-1/2 py-2.5 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">Cancel</button>
+                    <button type="submit" class="w-1/2 py-2.5 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-600 text-white shadow-lg shadow-cyan-500/30">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 4 Video Projects Data Array
+        let videoProjects = [
+            {
+                id: 0,
+                title: "Project 1",
+                src: "ejazai.mp4",
+                poster: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+                desc: "Explore fluid motion graphics combined with natural elements and dynamic color grading."
+            },
+            {
+                id: 1,
+                title: "Project 2",
+                src: "ai1.mp4",
+                poster: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+                desc: "Architectural visualization rendering intricate 3D geometries and ambient lighting systems."
+            },
+            {
+                id: 2,
+                title: "Project 3",
+                src: "ai2.mp4",
+                poster: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+                desc: "Dynamic camera movements highlighting sleek technology design and modern digital aesthetics."
+            },
+            {
+                id: 3,
+                title: "Project 4",
+                src: "a3.mp4",
+                poster: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80",
+                desc: "Vibrant particle simulation with customized light trails and futuristic VFX rendering."
+            }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        // Render Cards into HTML
+        function renderVideoGrid() {
+            const grid = document.getElementById('video-grid');
+            grid.innerHTML = '';
+
+            videoProjects.forEach((proj, idx) => {
+                const card = document.createElement('div');
+                card.className = "group relative rounded-3xl overflow-hidden glass-panel tilt-card shadow-xl transition-all duration-500 cursor-pointer flex flex-col justify-between";
+                card.setAttribute('onmousemove', 'handleTilt(event, this)');
+                card.setAttribute('onmouseleave', 'resetTilt(this)');
+
+                card.innerHTML = `
+                    <div class="relative aspect-video w-full overflow-hidden bg-slate-900" onclick="openLightbox(${idx})">
+                        <video id="card-video-${idx}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" poster="${proj.poster}" muted loop playsinline preload="metadata">
+                            <source src="${proj.src}" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-slate-950/30 group-hover:bg-slate-950/10 transition-colors duration-300"></div>
+                        
+                        <!-- Hover Play Indicator -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-14 h-14 rounded-full bg-cyan-500/90 text-white flex items-center justify-center shadow-lg shadow-cyan-500/50 backdrop-blur-md transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                                <i class="fa-solid fa-play text-lg translate-x-0.5"></i>
+                            </div>
+                        </div>
+
+                        <!-- Slot Tag -->
+                        <div class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/70 text-cyan-400 border border-cyan-500/30 backdrop-blur-md">
+                            Project 0${idx + 1}
+                        </div>
+
+                        <!-- Card Quick Edit -->
+                        <button onclick="event.stopPropagation(); openEditModal(${idx})" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-900/70 text-slate-300 hover:text-white hover:bg-cyan-500 flex items-center justify-center backdrop-blur-md transition-all duration-300">
+                            <i class="fa-solid fa-pen text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-6 flex flex-col justify-between flex-grow" onclick="openLightbox(${idx})">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors mb-2">${proj.title}</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">${proj.desc}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-play"></i> Watch Video
+                            </span>
+                            <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                `;
+
+                // Add Hover Play/Pause dynamic triggers
+                const videoEl = card.querySelector(`#card-video-${idx}`);
+                card.addEventListener('mouseenter', () => {
+                    videoEl.play().catch(() => {});
+                });
+                card.addEventListener('mouseleave', () => {
+                    videoEl.pause();
+                    videoEl.currentTime = 0;
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 3D Tilt Effect
+        function handleTilt(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        }
+
+        function resetTilt(card) {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        }
+
+        // Lightbox Functions
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const proj = videoProjects[index];
+            
+            document.getElementById('lb-counter').textContent = `${index + 1} of ${videoProjects.length}`;
+            document.getElementById('lb-title').textContent = proj.title;
+            document.getElementById('lb-desc').textContent = proj.desc;
+            
+            const lbVideo = document.getElementById('lb-video');
+            lbVideo.src = proj.src;
+            lbVideo.play().catch(() => {});
+
+            const modal = document.getElementById('lightbox-modal');
+            const content = document.getElementById('lightbox-content');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const content = document.getElementById('lightbox-content');
+            const lbVideo = document.getElementById('lb-video');
+            
+            lbVideo.pause();
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            document.body.style.overflow = 'auto';
+        }
+
+        function prevLightbox() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + videoProjects.length) % videoProjects.length;
+            openLightbox(currentLightboxIndex);
+        }
+
+        function nextLightbox() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % videoProjects.length;
+            openLightbox(currentLightboxIndex);
+        }
+
+        // Keyboard Navigation for Lightbox
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('lightbox-modal');
+            if (!modal.classList.contains('opacity-0')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevLightbox();
+                if (e.key === 'ArrowRight') nextLightbox();
+            }
+        });
+
+        // Edit Modal Functions
+        function openEditModal(slotIdx = 0) {
+            document.getElementById('edit-slot-select').value = slotIdx;
+            loadFormValues(slotIdx);
+            
+            const modal = document.getElementById('edit-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function loadFormValues(slotIdx) {
+            const proj = videoProjects[slotIdx];
+            document.getElementById('edit-title').value = proj.title;
+            document.getElementById('edit-src').value = proj.src;
+            document.getElementById('edit-poster').value = proj.poster || '';
+            document.getElementById('edit-desc').value = proj.desc;
+        }
+
+        function saveVideoChanges(e) {
+            e.preventDefault();
+            const slotIdx = parseInt(document.getElementById('edit-slot-select').value);
+            
+            videoProjects[slotIdx] = {
+                id: slotIdx,
+                title: document.getElementById('edit-title').value,
+                src: document.getElementById('edit-src').value,
+                poster: document.getElementById('edit-poster').value,
+                desc: document.getElementById('edit-desc').value
+            };
+
+            renderVideoGrid();
+            closeEditModal();
+        }
+
+        function editCurrentLightboxVideo() {
+            closeLightbox();
+            openEditModal(currentLightboxIndex);
+        }
+
+        // Dark / Light Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Initialize App
+        window.onload = function() {
+            renderVideoGrid();
+        };
+    </script>
+</body>
+</html>

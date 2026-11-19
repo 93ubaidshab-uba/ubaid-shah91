@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejaz Electric | Professional Electrical & Appliance Repair Services</title>
+  
+  <!-- Font Awesome Icons & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .glass-card {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+
+    .gradient-hero {
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.18), transparent 50%),
+                  radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.12), transparent 50%);
+    }
+
+    .glow-gold:hover {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen antialiased flex flex-col justify-between selection:bg-brand-500 selection:text-slate-950">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo / Name -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-400 text-slate-950 flex items-center justify-center font-bold text-xl shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200">
+          <i class="fas fa-bolt text-slate-950"></i>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight block leading-none text-white">Ejaz Electric</span>
+          <span class="text-xs text-brand-400 font-semibold uppercase tracking-wider block mt-1">Services & Repairing Expert</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-300">
+        <a href="#services" class="hover:text-brand-400 transition-colors">Our Services</a>
+        <a href="#about" class="hover:text-brand-400 transition-colors">Why Choose Us</a>
+        <a href="#location" class="hover:text-brand-400 transition-colors">Location</a>
+        <a href="#contact" class="hover:text-brand-400 transition-colors">Contact Us</a>
+      </nav>
+
+      <!-- Header Quick Contact Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20assistance%20with%20electrical%20services." target="_blank" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all shadow-md shadow-emerald-600/20">
+          <i class="fab fa-whatsapp text-lg"></i>
+          <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+
+        <a href="tel:03483219524" class="px-3.5 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-brand-500/20 transition-all">
+          <i class="fas fa-phone-alt"></i>
+          <span class="hidden md:inline">0348-3219524</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-12 pb-16 lg:pt-20 lg:pb-28 gradient-hero overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text & Quick Contact Options -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-semibold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Fast On-Demand Electrical & Repairing Services
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Reliable Solutions for <br class="hidden sm:inline">
+              <span class="bg-gradient-to-r from-brand-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">Electrical Panels, Motors & Appliances</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Welcome to <strong class="text-white">Ejaz Electric</strong>! We specialize in single & 3-phase motor winding, industrial & home electrical panel wiring, automatic washing machines, microwave ovens, water pumps, fans, and home appliance repairs in Burns Road, Karachi.
+            </p>
+
+            <!-- Direct Contact Links Buttons -->
+            <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+              <!-- WhatsApp Primary Direct Link -->
+              <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" class="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold flex items-center gap-2.5 shadow-lg shadow-emerald-600/25 hover:scale-[1.02] transition-all">
+                <i class="fab fa-whatsapp text-xl"></i>
+                <span>Chat on WhatsApp</span>
+              </a>
+
+              <!-- Call Primary -->
+              <a href="tel:03483219524" class="px-6 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold flex items-center gap-2.5 shadow-lg shadow-brand-500/25 hover:scale-[1.02] transition-all">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call: 0348-3219524</span>
+              </a>
+
+              <!-- Call Secondary -->
+              <a href="tel:03202181419" class="px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold flex items-center gap-2 border border-slate-700 transition-all">
+                <i class="fas fa-mobile-alt text-brand-400"></i>
+                <span>0320-2181419</span>
+              </a>
+            </div>
+
+            <!-- Email & Address Badges -->
+            <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-300">
+              <a href="mailto:shahzadkhan1234567812@gmail.com" class="flex items-center gap-2 hover:text-brand-400 transition-colors bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+                <i class="fas fa-envelope text-brand-400"></i>
+                <span>shahzadkhan1234567812@gmail.com</span>
+              </a>
+              <a href="#location" class="flex items-center gap-2 hover:text-brand-400 transition-colors bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+                <i class="fas fa-location-dot text-rose-400"></i>
+                <span>Burns Road, Karachi</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Hero Graphic / Highlight Card -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md">
+              <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500 to-emerald-500 opacity-30 blur-xl"></div>
+              
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 p-6 space-y-6">
+                
+                <div class="flex items-center gap-4 pb-4 border-b border-slate-800">
+                  <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center font-bold text-2xl">
+                    <i class="fas fa-tools"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white">Ejaz Electric</h3>
+                    <p class="text-xs text-slate-400">Gali No 3, Burns Road, Karachi</p>
+                  </div>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                  <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <span class="text-slate-400">Primary Phone:</span>
+                    <a href="tel:03483219524" class="font-bold text-brand-400 hover:underline">0348-3219524</a>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <span class="text-slate-400">Secondary Phone:</span>
+                    <a href="tel:03202181419" class="font-bold text-brand-400 hover:underline">0320-2181419</a>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <span class="text-slate-400">WhatsApp 1:</span>
+                    <a href="https://wa.me/923483219524" target="_blank" class="font-bold text-emerald-400 hover:underline">Chat 0348-3219524 &rarr;</a>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                    <span class="text-slate-400">WhatsApp 2:</span>
+                    <a href="https://wa.me/923202181419" target="_blank" class="font-bold text-emerald-400 hover:underline">Chat 0320-2181419 &rarr;</a>
+                  </div>
+                </div>
+
+                <a href="#contact" class="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Book Service / Get Quote</span>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-900/60 border-y border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-brand-400 font-bold uppercase tracking-wider text-xs">Our Specialty</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Services & Repairing</h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-3">High-quality motor winding, panel installations, and expert home appliance repair in Karachi.</p>
+        </div>
+
+        <!-- Services Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Service 1: Motor Winding -->
+          <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 shadow-xl hover:border-brand-500/50 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="fas fa-rotate"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Motor Winding & Repairing</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                All types of single & three-phase motors winding, donkey pump motors, and water pumps repairing with heavy copper durability.
+              </p>
+            </div>
+            <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20Motor%20Winding%20%26%20Repairing%20service." target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <i class="fab fa-whatsapp text-sm"></i>
+              <span>Book via WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Service 2: Electrical Panels & Wiring -->
+          <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 shadow-xl hover:border-brand-500/50 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="fas fa-plug-circle-bolt"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Electrical Panels & Wiring</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                Industrial & domestic electrical panel wiring, circuit breaker setup, load distribution, full installation, and maintenance.
+              </p>
+            </div>
+            <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20Electrical%20Panels%20%26%20Wiring%20service." target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <i class="fab fa-whatsapp text-sm"></i>
+              <span>Book via WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Service 3: Home Appliances Repairing -->
+          <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 shadow-xl hover:border-brand-500/50 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="fas fa-screwdriver-wrench"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Home Appliances Repairing</h3>
+              <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-400"></i> Automatic Washing Machines</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-400"></i> Microwave Ovens</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-400"></i> Juicer & Blender Repairing</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check text-brand-400"></i> Fan & Iron Repairing</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20Home%20Appliance%20Repairing." target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <i class="fab fa-whatsapp text-sm"></i>
+              <span>Book via WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Service 4: Installation & Maintenance -->
+          <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 shadow-xl hover:border-brand-500/50 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="fas fa-shield-halved"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Installation & Maintenance</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                Complete electrical setup, emergency power outage troubleshooting, grounding checks, and preventive maintenance.
+              </p>
+            </div>
+            <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20Installation%20%26%20Maintenance%20service." target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <i class="fab fa-whatsapp text-sm"></i>
+              <span>Book via WhatsApp</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Location & Address Section -->
+    <section id="location" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-brand-400 font-bold uppercase tracking-wider text-xs">Shop Location</span>
+            <h2 class="text-3xl font-bold text-white">Visit Ejaz Electric</h2>
+            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+              Located conveniently in Burns Road, Karachi. You can bring your motors, washing machines, microwaves, juicers, irons, and fans for instant expert repair or schedule a technician visit.
+            </p>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-location-dot text-rose-500 text-lg mt-0.5"></i>
+                <div>
+                  <span class="text-xs text-slate-400 uppercase font-semibold block">Full Address</span>
+                  <p class="text-sm font-bold text-white">Gali No 3, Near Bmb Toddlers School, Burns Road, Karachi.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 pt-2 border-t border-slate-800">
+                <i class="fas fa-envelope text-amber-400 text-lg mt-0.5"></i>
+                <div>
+                  <span class="text-xs text-slate-400 uppercase font-semibold block">Email Support</span>
+                  <a href="mailto:shahzadkhan1234567812@gmail.com" class="text-sm font-bold text-brand-400 hover:underline break-all">shahzadkhan1234567812@gmail.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="https://maps.google.com/?q=Burns+Road+Karachi" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-xs border border-slate-700 transition-all">
+                <i class="fas fa-map-location-dot text-brand-400"></i>
+                <span>Open Directions in Google Maps</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Map Embed Container -->
+          <div class="lg:col-span-7">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl h-80 relative bg-slate-900">
+              <iframe 
+                title="Ejaz Electric Location Map"
+                class="w-full h-full border-0 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.375685532551!2d67.01258!3d24.85125!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e107c1f887b%3A0x6b7724219b1090f!2sBurns%20Road%2C%20Karachi!5e0!3m2!1sen!2spk!4v1700000000000!5m2!1sen!2spk" 
+                allowfullscreen="" 
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct Contact Section -->
+    <section id="contact" class="py-20 bg-slate-900/40 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Interactive WhatsApp Booking Form -->
+          <div class="lg:col-span-7 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl">
+            <h3 class="text-2xl font-bold text-white mb-2">Request Service / Inquiry</h3>
+            <p class="text-xs sm:text-sm text-slate-400 mb-6">Select your service and send an instant formatted message directly to our WhatsApp.</p>
+
+            <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Your Full Name</label>
+                  <input type="text" id="custName" required placeholder="Enter your name" class="w-full px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Phone / WhatsApp Number</label>
+                  <input type="tel" id="custPhone" required placeholder="e.g. 03001234567" class="w-full px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Select Needed Service</label>
+                <select id="custService" class="w-full px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                  <option value="Motor Winding & Repairing">Motor Winding & Repairing (Single/3-Phase, Pumps)</option>
+                  <option value="Electrical Panels & Wiring">Electrical Panels & Wiring (Industrial/Domestic)</option>
+                  <option value="Automatic Washing Machine Repair">Automatic Washing Machine Repair</option>
+                  <option value="Microwave Oven Repair">Microwave Oven Repair</option>
+                  <option value="Juicer & Blender Repair">Juicer & Blender Repair</option>
+                  <option value="Fan & Iron Repair">Fan & Iron Repair</option>
+                  <option value="General Electrical Setup & Troubleshooting">General Electrical Setup & Troubleshooting</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Details / Issue Description</label>
+                <textarea id="custMsg" rows="3" placeholder="Describe the issue or service you need..." class="w-full px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="submit" class="flex-1 py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2">
+                  <i class="fab fa-whatsapp text-lg"></i>
+                  <span>Send Request to WhatsApp</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Quick Reach Phone Cards -->
+          <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+            
+            <div class="p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-white shadow-xl space-y-6 relative overflow-hidden border border-brand-500/30">
+              <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl"></div>
+
+              <h3 class="text-2xl font-bold">Need Immediate Help?</h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Call our technical team directly for emergency electrical troubleshooting or motor repair consultations.
+              </p>
+
+              <div class="space-y-3 pt-2">
+                <!-- Phone 1 Link -->
+                <a href="tel:03483219524" class="w-full py-3.5 px-6 rounded-xl bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm flex items-center justify-center gap-3 transition-colors shadow-lg shadow-brand-500/30">
+                  <i class="fas fa-phone-volume text-lg"></i>
+                  <span>Call 0348-3219524</span>
+                </a>
+
+                <!-- Phone 2 Link -->
+                <a href="tel:03202181419" class="w-full py-3.5 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-sm flex items-center justify-center gap-3 transition-colors border border-slate-700">
+                  <i class="fas fa-mobile-alt text-brand-400 text-lg"></i>
+                  <span>Call 0320-2181419</span>
+                </a>
+
+                <!-- Email Link -->
+                <a href="mailto:shahzadkhan1234567812@gmail.com" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-900 text-amber-400 font-semibold text-xs flex items-center justify-center gap-2 transition-colors border border-slate-800 truncate">
+                  <i class="fas fa-envelope"></i>
+                  <span class="truncate">shahzadkhan1234567812@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Shop Info Card -->
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-sm">
+              <h4 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+                <i class="fas fa-store text-brand-400"></i> Ejaz Electric Shop
+              </h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Gali No 3, Near Bmb Toddlers School, Burns Road, Karachi.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 py-8 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-bold text-slate-200">Ejaz Electric - Services & Repairing</p>
+        <p class="text-xs text-slate-500 mt-1">&copy; 2026 Ejaz Electric, Burns Road, Karachi. All Rights Reserved.</p>
+      </div>
+
+      <div class="flex items-center gap-4 text-slate-300 font-semibold">
+        <a href="tel:03483219524" class="hover:text-brand-400">0348-3219524</a>
+        <span>•</span>
+        <a href="tel:03202181419" class="hover:text-brand-400">0320-2181419</a>
+        <span>•</span>
+        <a href="#hero" class="hover:text-brand-400">Top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Contact Buttons (Bottom Right) -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    
+    <!-- WhatsApp Floating Action -->
+    <a href="https://wa.me/923483219524?text=Hello%20Ejaz%20Electric%2C%20I%20need%20assistance%20with%20electrical%20services." target="_blank" title="Chat on WhatsApp" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-2xl shadow-emerald-600/40 hover:scale-110 transition-all">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Phone Call Floating Action -->
+    <a href="tel:03483219524" title="Call Ejaz Electric Directly" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-brand-500 hover:bg-brand-600 text-slate-950 flex items-center justify-center text-2xl shadow-2xl shadow-brand-500/40 hover:scale-110 transition-all font-bold">
+      <i class="fas fa-phone-alt"></i>
+    </a>
+
+  </div>
+
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('custName').value.trim() || 'Client';
+      const phone = document.getElementById('custPhone').value.trim() || 'Not provided';
+      const service = document.getElementById('custService').value;
+      const message = document.getElementById('custMsg').value.trim() || 'No additional message.';
+
+      const formattedText = `*New Service Request - Ejaz Electric*\n\n` +
+                            `*Name:* ${name}\n` +
+                            `*Phone:* ${phone}\n` +
+                            `*Service:* ${service}\n` +
+                            `*Details:* ${message}`;
+
+      // Open direct WhatsApp chat with pre-filled message to primary WhatsApp number
+      const targetUrl = `https://wa.me/923483219524?text=${encodeURIComponent(formattedText)}`;
+      window.open(targetUrl, '_blank');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - 7 Photo Gallery</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            500: '#0066ff',
+                            600: '#0052cc',
+                            900: '#001a4d',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Ambient Animated Blobs */
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px -15px rgba(0, 102, 255, 0.25);
+        }
+
+        /* 3D Tilt perspective container */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .tilt-content {
+            transform: translateZ(20px);
+        }
+
+        /* Entrance Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Image hover zoom */
+        .photo-wrapper img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .photo-card:hover .photo-wrapper img {
+            transform: scale(1.08);
+        }
+
+        /* Scrollbar customization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden transition-colors duration-300">
+
+    <!-- Ambient Animated Background Lights -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="ambient-blob w-[500px] h-[500px] bg-blue-500/30 dark:bg-blue-600/25 top-[-100px] left-[-100px] animate-pulse-slow"></div>
+        <div class="ambient-blob w-[600px] h-[600px] bg-indigo-500/25 dark:bg-purple-600/20 bottom-[-150px] right-[-100px] animate-pulse-slow" style="animation-delay: 3s;"></div>
+        <div class="ambient-blob w-[400px] h-[400px] bg-cyan-400/20 dark:bg-cyan-600/15 top-[40%] left-[50%] -translate-x-1/2 animate-pulse-slow" style="animation-delay: 5s;"></div>
+    </div>
+
+    <!-- Floating Theme Toggle & Edit Button Bar (Top Right) -->
+    <div class="fixed top-6 right-6 z-40 flex items-center gap-3">
+        <!-- Edit Photo URLs Button -->
+        <button id="openEditModalBtn" onclick="openEditModal()" class="flex items-center gap-2 px-4 py-2.5 rounded-full glass-card hover:bg-white/90 dark:hover:bg-slate-800/90 text-slate-700 dark:text-slate-200 text-xs font-semibold tracking-wide uppercase shadow-lg transition-all active:scale-95">
+            <i class="fa-solid fa-pen-to-square text-blue-500"></i>
+            <span>Edit Photos</span>
+        </button>
+
+        <!-- Dark/Light Theme Switcher -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle Theme" class="w-11 h-11 rounded-full glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-blue-400 shadow-lg transition-all active:scale-90">
+            <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+            <i class="fa-solid fa-sun text-lg hidden dark:block text-amber-400"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+        
+        <!-- Page Header -->
+        <header class="text-center max-w-3xl mx-auto mb-16 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-wider uppercase mb-4">
+                <i class="fa-solid fa-sparkles text-xs"></i>
+                <span>Portfolio Showcase</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+                My <span class="bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">Projects</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+                A curated gallery of 7 showcase projects. Click on any project card to view in full resolution or customize photos on the fly.
+            </p>
+        </header>
+
+        <!-- 7-Photo Bento Grid Layout -->
+        <div id="photoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6">
+            <!-- Grid cards will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-slate-950/90 backdrop-blur-xl p-4 sm:p-6">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-slate-800/80 text-white hover:bg-slate-700 flex items-center justify-center text-lg transition-all hover:rotate-90">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Prev Button -->
+        <button onclick="prevPhoto()" class="absolute left-4 sm:left-8 z-10 w-12 h-12 rounded-full bg-slate-800/80 text-white hover:bg-blue-600 flex items-center justify-center text-lg transition-all active:scale-95 shadow-xl">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Next Button -->
+        <button onclick="nextPhoto()" class="absolute right-4 sm:right-8 z-10 w-12 h-12 rounded-full bg-slate-800/80 text-white hover:bg-blue-600 flex items-center justify-center text-lg transition-all active:scale-95 shadow-xl">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Lightbox Content Card -->
+        <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col rounded-2xl overflow-hidden glass-card dark:bg-slate-900/90 shadow-2xl border border-white/10">
+            <!-- Image Frame -->
+            <div class="relative flex-1 bg-black/60 flex items-center justify-center overflow-hidden min-h-[300px] sm:min-h-[450px]">
+                <img id="lightboxImage" src="" alt="" class="max-h-[70vh] w-auto max-w-full object-contain transition-all duration-300">
+            </div>
+
+            <!-- Footer Details Bar -->
+            <div class="p-6 bg-slate-900/95 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span id="lightboxIndex" class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-semibold">1 of 7</span>
+                        <h3 id="lightboxTitle" class="text-xl font-bold">Project Title</h3>
+                    </div>
+                    <p id="lightboxDesc" class="text-sm text-slate-400">Project description goes here.</p>
+                </div>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button onclick="copyPhotoURL()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Copy Link</span>
+                    </button>
+                    <a id="lightboxDownloadBtn" href="" target="_blank" download class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-down-to-line"></i>
+                        <span>View Original</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Photos Dynamic Editor Modal -->
+    <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-slate-950/80 backdrop-blur-md p-4">
+        <div class="glass-card dark:bg-slate-900 w-full max-w-2xl max-h-[85vh] rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/20">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
+                        <i class="fa-solid fa-images"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">Customize Photo URLs</h3>
+                </div>
+                <button onclick="closeEditModal()" class="w-8 h-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 flex items-center justify-center text-slate-500">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body: Scrollable list of 7 items -->
+            <div id="editFormContainer" class="p-6 overflow-y-auto space-y-6 flex-1">
+                <!-- Form fields injected via JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 flex items-center justify-end gap-3">
+                <button onclick="closeEditModal()" class="px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    Cancel
+                </button>
+                <button onclick="savePhotoEdits()" class="px-5 py-2 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-colors">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-card dark:bg-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-blue-500/30">
+        <i class="fa-solid fa-circle-check text-blue-500 text-lg"></i>
+        <span id="toastMsg" class="text-xs font-semibold">Action completed</span>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Default 7 High Resolution Projects Data
+        const defaultProjects = [
+            {
+                id: 1,
+                title: "Project 1",
+                desc: "High-performance data visualization interface built for real-time telemetry tracking.",
+                url: "headphones.png",
+                colSpan: "lg:col-span-8", // Bento Featured Wide Card
+                height: "h-80 sm:h-96"
+            },
+            {
+                id: 2,
+                title: "Project 2",
+                desc: "Next-gen deep learning platform architecture diagram & concept artwork.",
+                url: "earbud.png",
+                colSpan: "lg:col-span-4",
+                height: "h-80 sm:h-96"
+            },
+            {
+                id: 3,
+                title: "Project 3",
+                desc: "Clean minimal user interface for digital wallet transactions and analytics.",
+                url: "money.png",
+                colSpan: "lg:col-span-4",
+                height: "h-80"
+            },
+            {
+                id: 4,
+                title: "Project 4",
+                desc: "Real-time robotics fleet control center user interface design.",
+                url: "marketing.png",
+                colSpan: "lg:col-span-4",
+                height: "h-80"
+            },
+            {
+                id: 5,
+                title: "Project 5",
+                desc: "Interactive spatial design system created for immersive AR experiences.",
+                url: "burgur.png",
+                colSpan: "lg:col-span-4",
+                height: "h-80"
+            },
+            {
+                id: 6,
+                title: "Project 6",
+                desc: "Scalable e-commerce store architecture with high-converting user experience.",
+                url: "billionaire.png",
+                colSpan: "lg:col-span-4",
+                height: "h-80 sm:h-96"
+            },
+            {
+                id: 7,
+                title: "Project 7",
+                desc: "Procedural web-GL shader rendering pipeline for algorithmic visual artwork.",
+                url: "video.png",
+                colSpan: "lg:col-span-8", // Bento Featured Wide Card
+                height: "h-80 sm:h-96"
+            }
+        ];
+
+        let projects = [...defaultProjects];
+        let currentLightboxIndex = 0;
+
+        // Initialize App on DOM Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedProjects();
+            renderGrid();
+            initTheme();
+        });
+
+        // Theme Toggle Functionality
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                showToast('Light Mode Activated');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                showToast('Dark Mode Activated');
+            }
+        }
+
+        // Local Storage for Customized Projects
+        function loadSavedProjects() {
+            const saved = localStorage.getItem('my_7_photo_projects');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length === 7) {
+                        projects = parsed;
+                    }
+                } catch(e) {
+                    console.error("Could not load saved projects", e);
+                }
+            }
+        }
+
+        function saveProjectsToStorage() {
+            localStorage.setItem('my_7_photo_projects', JSON.stringify(projects));
+        }
+
+        // Render Bento Grid Cards
+        function renderGrid() {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = '';
+
+            projects.forEach((proj, idx) => {
+                const card = document.createElement('div');
+                card.className = `${proj.colSpan} photo-card tilt-card glass-card rounded-3xl overflow-hidden relative group cursor-pointer animate-fade-in-up`;
+                card.style.animationDelay = `${(idx + 1) * 0.1}s`;
+
+                card.innerHTML = `
+                    <div class="photo-wrapper relative w-full ${proj.height} overflow-hidden">
+                        <img src="${proj.url}" alt="${proj.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Image+Not+Found'">
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                        
+                        <!-- Top Tag & Quick View -->
+                        <div class="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                            <span class="px-3 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider uppercase border border-white/10">
+                                Project 0${idx + 1}
+                            </span>
+                            <div class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <i class="fa-solid fa-expand text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Information Text -->
+                        <div class="absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors flex items-center justify-between">
+                                <span>${proj.title}</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-0 group-hover:opacity-100 transition-opacity text-blue-400"></i>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-300 line-clamp-2 font-normal leading-relaxed">
+                                ${proj.desc}
+                            </p>
+                        </div>
+                    </div>
+                `;
+
+                // Add Lightbox Trigger
+                card.addEventListener('click', () => openLightbox(idx));
+
+                // Add 3D Tilt Effect
+                initCardTilt(card);
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 3D Card Tilt Functionality
+        function initCardTilt(card) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -7;
+                const rotateY = ((x - centerX) / centerX) * 7;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        }
+
+        // Lightbox Modal Controls
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightboxContent();
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightboxContent() {
+            const proj = projects[currentLightboxIndex];
+            const img = document.getElementById('lightboxImage');
+            
+            img.style.opacity = '0';
+            img.style.transform = 'scale(0.96)';
+
+            setTimeout(() => {
+                img.src = proj.url;
+                document.getElementById('lightboxTitle').innerText = proj.title;
+                document.getElementById('lightboxDesc').innerText = proj.desc;
+                document.getElementById('lightboxIndex').innerText = `${currentLightboxIndex + 1} of 7`;
+                document.getElementById('lightboxDownloadBtn').href = proj.url;
+                
+                img.style.opacity = '1';
+                img.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        function prevPhoto() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + projects.length) % projects.length;
+            updateLightboxContent();
+        }
+
+        function nextPhoto() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % projects.length;
+            updateLightboxContent();
+        }
+
+        function copyPhotoURL() {
+            const url = projects[currentLightboxIndex].url;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Photo Link Copied to Clipboard!');
+            }).catch(() => {
+                // Fallback copy
+                const el = document.createElement('textarea');
+                el.value = url;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                showToast('Photo Link Copied!');
+            });
+        }
+
+        // Keyboard Shortcuts for Lightbox
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('lightboxModal');
+            if (!modal.classList.contains('pointer-events-none')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'ArrowRight') nextPhoto();
+            }
+        });
+
+        // Edit Photos Modal Functions
+        function openEditModal() {
+            const container = document.getElementById('editFormContainer');
+            container.innerHTML = '';
+
+            projects.forEach((proj, idx) => {
+                const item = document.createElement('div');
+                item.className = 'p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-3';
+                item.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wider">Photo Slot 0${idx + 1}</span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">Title</label>
+                        <input type="text" id="edit-title-${idx}" value="${escapeHtml(proj.title)}" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">Image URL</label>
+                        <input type="text" id="edit-url-${idx}" value="${escapeHtml(proj.url)}" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:border-blue-500 font-mono text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">Description</label>
+                        <input type="text" id="edit-desc-${idx}" value="${escapeHtml(proj.desc)}" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:border-blue-500">
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+
+            const editModal = document.getElementById('editModal');
+            editModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeEditModal() {
+            const editModal = document.getElementById('editModal');
+            editModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function savePhotoEdits() {
+            projects.forEach((proj, idx) => {
+                const titleVal = document.getElementById(`edit-title-${idx}`).value.trim();
+                const urlVal = document.getElementById(`edit-url-${idx}`).value.trim();
+                const descVal = document.getElementById(`edit-desc-${idx}`).value.trim();
+
+                if (titleVal) proj.title = titleVal;
+                if (urlVal) proj.url = urlVal;
+                if (descVal) proj.desc = descVal;
+            });
+
+            saveProjectsToStorage();
+            renderGrid();
+            closeEditModal();
+            showToast('All 7 Project Photos Updated Successfully!');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/"/g, '&quot;');
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html><!--  -->
